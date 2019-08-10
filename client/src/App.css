@@ -23,11 +23,80 @@
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Form Stylings */
+.user-form {
+  border: 1px solid black;
+  border-radius: 5px;
+  margin: auto;
+  width: 25%;  
+}
+
+.form-header {
+  font-size: 21px;
+}
+
+input, textarea {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.username-wrapper {
+  width: 75%;
+  margin: auto;
+  margin-bottom: 20px;
+}
+
+.password-wrapper {
+  width: 75%;
+  margin: auto;
+  margin-bottom: 20px;
+}
+
+.field-description {
+  margin: 0px;
+  font-size: 12px;
+  text-align: left;
+}
+
+.error {
+  font-size: 10px;
+  color: red;
+  text-align: left;
+  margin: 0px;
+}
+
+/* Button Stylings */
+.btn {
+  border-radius: 5px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.btn:hover {
+  cursor: pointer;
+}
+
+/* Dish Card Stylings */
+.user-card {
+  width: 15%;
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.name {
+  font-weight: bold;
+  text-align: center;
+}
+
+.dinner-details {
+  font-size: 12px;
+  text-align: left;
+  margin-left: 10px;
+}
+
+.dinner-details:last-child {
+  margin-bottom: 10px;
 }

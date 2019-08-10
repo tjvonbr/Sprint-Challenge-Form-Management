@@ -10,42 +10,47 @@ const UserForm = ({ errors, touched, status }) => {
 
   useEffect(() => {
     if (status) {
-      setUsers([...users, status])
-      setValue({ username: "", password: "" })
+      setUsers([...users, status]);
+      setValue({ username: "", password: "" });
+      console.log("Users", users)
     }
   }, [status]);
 
   useEffect(() => {
     axios
       .get('http://localhost:5000/api/restricted/data')
-      .then(response => console.log('Users', users))
+      .then(response => setUsers(response.data))
       .catch(error => {
         console.log("Error", error);
       })
-  }, []);
+  }, [users]);
 
   return (
     <>
       <div className="user-form">
-        <h1>User Registration Form</h1>
+        <h1 className="form-header">User Registration Form</h1>
         <Form>
-          <Field type="text" name="username" placeholder="Name" />
-            <p className="field-description">Please enter your full name.</p>
-            {touched.username && errors.username && (
-            <p className="error">*{ errors.username }</p>
-            )}
-          <Field type="text" name="password" placeholder="Password" />
-            <p className="field-description">Passwords must contain at least 8 characters.</p>
-            {touched.password && errors.password && (
-            <p className="error">*{ errors.password }</p>
-            )}
+          <div className="username-wrapper">
+            <Field type="text" name="username" placeholder="Name" />
+              <p className="field-description">Please enter your full name.</p>
+              {touched.username && errors.username && (
+              <p className="error">*{ errors.username }</p>
+              )}
+          </div>
+          <div className="password-wrapper">
+            <Field type="password" name="password" placeholder="Password" />
+              <p className="field-description">Passwords must contain at least 8 characters.</p>
+              {touched.password && errors.password && (
+              <p className="error">*{ errors.password }</p>
+              )}
+          </div>
           <button className="btn submit-btn" type="submit">Submit</button>
         </Form>
       </div>
 
       <div className="users-container">
-        {users.map((users, index) => (
-          <UserCard user={users}
+        {users.map((user, index) => (
+          <UserCard user={user}
                     key={index}
           />))}
       </div>
@@ -63,20 +68,20 @@ const FormikUserForm = withFormik({
 
   validationSchema: Yup.object().shape({
     username: Yup.string()
-      .required('This is a required field'),
+      .required('Username is a required field'),
     password: Yup.string()
       .required('Password is a required field')
       .min(8, 'Please make sure your password contains at least 8 characters.')
   }),
 
-  handleSubmit(values, { setStatus, setValue }) {
+  handleSubmit(values, { setStatus, resetForm }) {
     axios
       .post('http://localhost:5000/api/register', values)
       .then(response => {
         setStatus(response);
+        resetForm();
         console.log('Response', response)
       })
-      .then(response => setValue({ username: "", password: "" }))
       .catch(error => console.log(error.response, error))
   },
 

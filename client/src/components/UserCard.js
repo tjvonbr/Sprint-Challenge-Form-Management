@@ -6,16 +6,18 @@ class UserCard extends React.Component {
     super(props);
   }
 
-    render(props) {
-      return (   
-        <Card className="user-card">
-          <Card.Content>
-            <Card.Header className="card-name">{ props.users.username }</Card.Header>
-            <Card.Meta className="card-email">{ props.users.password }</Card.Meta>
-          </Card.Content>
-        </Card>
-      )
-    }
+  render() {
+    return (   
+      <Card className="user-card">
+        <Card.Content>
+          <Card.Header className="dinner-card name">{ this.props.user.name }</Card.Header>
+          <Card.Content className="dinner-details">Course: { this.props.user.course }</Card.Content>
+          <Card.Content className="dinner-details">{ this.props.user.ingredients }</Card.Content>
+          <Card.Content className="dinner-details">{ this.props.user.technique }</Card.Content>
+        </Card.Content>
+      </Card>
+    )
+  }
 }
 
 export default UserCard;
